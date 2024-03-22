@@ -25,20 +25,16 @@ def imprimirMetadatos(target):
 def imprimirXlsx(rutaCompletaArchivo):
     print(f"Metadatos del archivo {rutaCompletaArchivo}")
     xlsx_file = load_workbook(rutaCompletaArchivo)
-    print(f"Title: {xlsx_file.properties.title}")
-    print(f"Creator: {xlsx_file.properties.creator}")
-    print(f"Description: {xlsx_file.properties.description}")
-    print(f"Subject: {xlsx_file.properties.subject}")
-    print(f"Identifier: {xlsx_file.properties.identifier}")
-    print(f"Language: {xlsx_file.properties.language}")
-    print(f"Created: {xlsx_file.properties.created}")
-    print(f"Modified: {xlsx_file.properties.modified}")
-    print(f"Last Modified By: {xlsx_file.properties.lastModifiedBy}")
-    print(f"Revision: {xlsx_file.properties.revision}")
-    print(f"Keywords: {xlsx_file.properties.keywords}")
-    print(f"Category: {xlsx_file.properties.category}")
-    print(f"Content Status: {xlsx_file.properties.contentStatus}")
-    print(f"Last Printed: {xlsx_file.properties.lastPrinted}")
+    
+    attrs = ["title", "creator", "description", "subject", 
+             "identifier", "language", "created", "modified",
+             "lastModifiedBy", "revision", "keywords", "category",
+             "contentStatus", "lastPrinted"]
+    
+    for attr in attrs:
+        value = getattr(xlsx_file.properties, attr)
+        if value:
+            print(f"{attr}: {value}")
     print("")
 
 def imprimirPdf(rutaCompletaArchivo):
